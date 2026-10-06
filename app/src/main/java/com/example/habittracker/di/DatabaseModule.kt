@@ -20,6 +20,7 @@ object DatabaseModule {
             context, AppDatabase::class.java, "habit_tracker"
         )
             .createFromAsset("database/habit_tracker.db")
+//            .fallbackToDestructiveMigration()
             .build()
     }
 

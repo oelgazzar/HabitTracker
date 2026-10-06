@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                                 }
                                 append(" - ")
                                 withStyle(SpanStyle(color = androidx.compose.ui.graphics.Color.Blue)) {
-                                    append(it.frequency.toString())
+                                    append(it.startDate.toString())
                                 }
                             }
                         )
