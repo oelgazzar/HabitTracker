@@ -1,16 +1,18 @@
 package com.example.habittracker.domain.streak
 
-import com.example.habittracker.domain.models.Occurrence
+import com.example.habittracker.domain.models.Record
 import java.time.LocalDate
 
 interface StreakRule {
     fun isConsecutive(
-        previous: Occurrence,
-        current: Occurrence
+        previous: Record,
+        current: Record
     ): Boolean
 
     fun isActive(
-        lastCompleted: Occurrence,
+        lastCompleted: Record,
         today: LocalDate
     ): Boolean
+
+    fun countsTowardsStreakCalculation(record: Record): Boolean
 }

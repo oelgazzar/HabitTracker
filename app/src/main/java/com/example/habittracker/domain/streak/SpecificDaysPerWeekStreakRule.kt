@@ -1,6 +1,6 @@
 package com.example.habittracker.domain.streak
 
-import com.example.habittracker.domain.models.Occurrence
+import com.example.habittracker.domain.models.Record
 import java.time.DayOfWeek
 import java.time.LocalDate
 
@@ -8,8 +8,8 @@ class SpecificDaysPerWeekStreakRule(
     private val days: Set<DayOfWeek>
 ) : StreakRule {
     override fun isConsecutive(
-        previous: Occurrence,
-        current: Occurrence
+        previous: Record,
+        current: Record
     ): Boolean {
         var next = previous.anchorDate.plusDays(1)
 
@@ -21,7 +21,7 @@ class SpecificDaysPerWeekStreakRule(
     }
 
     override fun isActive(
-        lastCompleted: Occurrence,
+        lastCompleted: Record,
         today: LocalDate
     ): Boolean {
         var next = lastCompleted.anchorDate.plusDays(1)
@@ -32,4 +32,7 @@ class SpecificDaysPerWeekStreakRule(
 
         return today.isAfter(next).not()
     }
+
+    override fun countsTowardsStreakCalculation(record: Record) =
+        record.anchorDate.dayOfWeek in days
 }

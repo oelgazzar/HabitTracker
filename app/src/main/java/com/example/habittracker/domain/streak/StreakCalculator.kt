@@ -1,23 +1,24 @@
 package com.example.habittracker.domain.streak
 
-import com.example.habittracker.domain.models.Occurrence
+import com.example.habittracker.domain.models.Record
 import java.time.LocalDate
 
 fun calculateStreak(
-    occurrences: List<Occurrence>,
+    records: List<Record>,
     rule: StreakRule
 ): Pair<Int, Int> {
 
-    if (occurrences.isEmpty()) return 0 to 0
+    val preparedRecords = records
+        .filter { record -> record.isSatisfied && rule.countsTowardsStreakCalculation(record) }
+        .sortedBy { record -> record.anchorDate }
 
-    val sorted = occurrences.distinct().sortedBy { it.anchorDate }
-    println(sorted)
+    if (preparedRecords.isEmpty()) return 0 to 0
 
     var current = 1
     var best = 1
 
-    for (i in 1..<sorted.size) {
-        if (rule.isConsecutive(sorted[i - 1], sorted[i])) {
+    for (i in 1..<preparedRecords.size) {
+        if (rule.isConsecutive(preparedRecords[i - 1], preparedRecords[i])) {
             current++
             best = maxOf(best, current)
         } else {
@@ -25,7 +26,7 @@ fun calculateStreak(
         }
     }
 
-    if (rule.isActive(sorted.last(), LocalDate.now()).not()) {
+    if (rule.isActive(preparedRecords.last(), LocalDate.now()).not()) {
         current = 0
     }
 

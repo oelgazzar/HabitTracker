@@ -6,5 +6,5 @@ data class HabitLog(
     val id: Int,
     val habitId: Int,
     val date: LocalDate,
-    val amount: Int
+    val value: Int
 )

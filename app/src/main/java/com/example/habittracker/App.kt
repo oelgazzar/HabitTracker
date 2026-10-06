@@ -24,9 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.occurrence.DailyOccurrenceProvider
-import com.example.habittracker.domain.occurrence.WeeklyOccurrenceProvider
-import com.example.habittracker.domain.streak.DailyStreakRule
+import com.example.habittracker.domain.models.toDays
+import com.example.habittracker.domain.models.toWeeks
 import com.example.habittracker.domain.streak.NDaysPerWeekStreakRule
 import com.example.habittracker.domain.streak.SpecificDaysPerWeekStreakRule
 import com.example.habittracker.domain.streak.calculateStreak
@@ -37,19 +36,22 @@ import java.time.DayOfWeek
 fun App(modifier: Modifier = Modifier) {
     val datePickerState = rememberDatePickerState()
     val dates = remember { mutableStateListOf(datePickerState.getSelectedDate()) }
-    val occurrenceProvider = remember { DailyOccurrenceProvider() }
-    var streak by remember { mutableStateOf(Pair<Int, Int>(0, 0)) }
+    var streak by remember { mutableStateOf(Pair(0, 0)) }
 
     LaunchedEffect(datePickerState.getSelectedDate()) {
+        println("LaunchedEffect #1")
         dates.add(datePickerState.getSelectedDate())
+    }
 
-        val occurrences = occurrenceProvider.getOccurrences(
-            dates.filterNotNull().map {
-                HabitLog(1, 1, it, 1)
-            }, 1
-        )
-        streak = calculateStreak(occurrences.filter { it.isCompleted },
-            SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.SATURDAY, DayOfWeek.SUNDAY, DayOfWeek.MONDAY)))
+    LaunchedEffect(dates.size) {
+        println("LaunchedEffect #2")
+        val days = dates.filterNotNull().map {
+                HabitLog(1, 1, it, 2)
+            }.toDays(2)
+        val weeks = days.toWeeks(2)
+
+        streak = calculateStreak(weeks,
+            NDaysPerWeekStreakRule())
     }
 
     Column(

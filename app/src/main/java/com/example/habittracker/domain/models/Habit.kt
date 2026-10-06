@@ -4,5 +4,5 @@ data class Habit(
     val id: Int,
     val name: String,
     val frequency: Frequency,
-    val targetAmount: Int?
+    val target: Int?
 )
