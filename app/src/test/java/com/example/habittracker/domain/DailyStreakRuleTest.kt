@@ -1,7 +1,7 @@
 package com.example.habittracker.domain
 
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.models.toDays
+import com.example.habittracker.domain.models.toDayRecords
 import com.example.habittracker.domain.streak.DailyStreakRule
 import com.example.habittracker.domain.streak.calculateStreak
 import org.junit.Assert.assertEquals
@@ -34,7 +34,7 @@ class DailyStreakRuleTest {
         val result = calculateStreak(
             records = listOf(
                 HabitLog(1, 1, today, 1)
-            ).toDays(1),
+            ).toDayRecords(1),
             rule = DailyStreakRule()
         )
 
@@ -53,7 +53,7 @@ class DailyStreakRuleTest {
             HabitLog(1,1,today.minusDays(2), 1),
             HabitLog(1,1,today.minusDays(1), 1),
             HabitLog(1,1,today,1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -69,7 +69,7 @@ class DailyStreakRuleTest {
 
         val records = (4L downTo 0L).map {
             HabitLog(1, 1, today.minusDays(it), 1)
-        }.toDays(1)
+        }.toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -93,7 +93,7 @@ class DailyStreakRuleTest {
             // gap
             HabitLog(1,1,today.minusDays(1),1),
             HabitLog(1,1,today,1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -119,7 +119,7 @@ class DailyStreakRuleTest {
             // Current streak of 2
             HabitLog(1,1,today.minusDays(1), 1),
             HabitLog(1,1,today, 1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -141,7 +141,7 @@ class DailyStreakRuleTest {
             HabitLog(1,1,today.minusDays(3),1),
             HabitLog(1,1,today.minusDays(2),1),
             HabitLog(1,1,today.minusDays(1),1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -165,7 +165,7 @@ class DailyStreakRuleTest {
             // Later streak = 2, but inactive
             HabitLog(1,1,today.minusDays(2),1),
             HabitLog(1,1,today.minusDays(1),1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -190,7 +190,7 @@ class DailyStreakRuleTest {
             HabitLog(1,1,today.minusDays(1), 0),
 
             HabitLog(1,1,today, 1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,

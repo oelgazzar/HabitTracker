@@ -1,8 +1,8 @@
 package com.example.habittracker.domain
 
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.models.toDays
-import com.example.habittracker.domain.models.toWeeks
+import com.example.habittracker.domain.models.toDayRecords
+import com.example.habittracker.domain.models.toWeekRecords
 import com.example.habittracker.domain.streak.NDaysPerWeekStreakRule
 import com.example.habittracker.domain.streak.calculateStreak
 import junit.framework.TestCase.assertEquals
@@ -21,8 +21,8 @@ class NDaysPerWeekStreakRuleTest {
         val days = listOf(
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(4)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(4)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(0 to 0, result)
     }
@@ -33,8 +33,8 @@ class NDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(3)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(1 to 1, result)
     }
@@ -46,8 +46,8 @@ class NDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 6), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(3)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(1 to 1, result)
     }
@@ -62,8 +62,8 @@ class NDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 14), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 16), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(3)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(2 to 2, result)
     }
@@ -81,8 +81,8 @@ class NDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 19), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 21), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 23), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(3)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(1 to 1, result)
     }
@@ -104,8 +104,8 @@ class NDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 3), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 4), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
-        ).toDays(1)
-        val weeks = days.toWeeks(3)
+        ).toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         val result = calculateStreak(weeks, NDaysPerWeekStreakRule())
         assertEquals(1 to 2, result)
     }

@@ -19,8 +19,8 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context, AppDatabase::class.java, "habit_tracker"
         )
-            .createFromAsset("database/habit_tracker.db")
-//            .fallbackToDestructiveMigration()
+//            .createFromAsset("database/habit_tracker.db")
+            .fallbackToDestructiveMigration()
             .build()
     }
 

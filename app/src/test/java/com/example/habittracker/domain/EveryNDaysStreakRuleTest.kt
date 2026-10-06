@@ -1,7 +1,7 @@
 package com.example.habittracker.domain
 
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.models.toDays
+import com.example.habittracker.domain.models.toDayRecords
 import com.example.habittracker.domain.streak.DailyStreakRule
 import com.example.habittracker.domain.streak.EveryNDaysStreakRule
 import com.example.habittracker.domain.streak.calculateStreak
@@ -35,7 +35,7 @@ class EveryNDaysStreakRuleTest {
         val result = calculateStreak(
             records = listOf(
                 HabitLog(1, 1, today, 1)
-            ).toDays(1),
+            ).toDayRecords(1),
             rule = EveryNDaysStreakRule(3)
         )
 
@@ -54,7 +54,7 @@ class EveryNDaysStreakRuleTest {
             HabitLog(1,1,today.minusDays(6), 1),
             HabitLog(1,1,today.minusDays(3), 1),
             HabitLog(1,1,today,1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -78,7 +78,7 @@ class EveryNDaysStreakRuleTest {
             // gap
             HabitLog(1,1,LocalDate.of(2026, 10, 8),1),
             HabitLog(1,1,LocalDate.of(2026, 10, 11),1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -100,7 +100,7 @@ class EveryNDaysStreakRuleTest {
             HabitLog(1,1,today.minusDays(4), 1),
             HabitLog(1,1,today.minusDays(3), 1),
             HabitLog(1,1,today, 1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -122,7 +122,7 @@ class EveryNDaysStreakRuleTest {
             HabitLog(1,1,LocalDate.of(2026, 10, 2),1),
             HabitLog(1,1,LocalDate.of(2026, 10, 5),1),
             HabitLog(1,1,LocalDate.of(2026, 10, 8),1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,
@@ -145,7 +145,7 @@ class EveryNDaysStreakRuleTest {
             HabitLog(1,1,LocalDate.of(2026, 10, 4), 0),
 
             HabitLog(1,1,LocalDate.of(2026, 10, 7), 1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(
             records = records,

@@ -2,17 +2,19 @@ package com.example.habittracker.domain.models
 
 import java.time.LocalDate
 
-data class Day(
+data class DayRecord(
+    override val habit: Habit,
     override val anchorDate: LocalDate,
     val logs: List<HabitLog>,
-    override val target: Int,
 ) : Record {
     override val progress: Int
         get() = logs.sumOf { it.value }
+    override val target: Int
+        get() = habit.target?:1
 }
 
-fun List<HabitLog>.toDays(dailyTarget: Int) = groupBy {
+fun List<HabitLog>.toDayRecords(habit: Habit) = groupBy {
     it.date
 }.map {
-    Day(it.key, it.value, dailyTarget)
+    DayRecord(habit, it.key, it.value)
 }

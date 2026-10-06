@@ -3,6 +3,7 @@ package com.example.habittracker.domain.models
 import java.time.LocalDate
 
 sealed interface Record {
+    val habit: Habit
     val anchorDate: LocalDate
     val progress: Int
     val target: Int

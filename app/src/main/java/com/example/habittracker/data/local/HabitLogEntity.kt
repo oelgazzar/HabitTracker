@@ -27,11 +27,15 @@ fun HabitLogEntity.toDomain() = HabitLog(
     value = value
 )
 
+fun List<HabitLogEntity>.toDomain() = map { it.toDomain() }
+
 fun HabitLog.toEntity() = HabitLogEntity(
     id = id,
     habitId = habitId,
     date = date.toString(),
     value = value
 )
+
+fun List<HabitLog>.toEntity() = map { it.toEntity() }
 
 

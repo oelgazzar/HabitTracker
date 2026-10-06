@@ -1,7 +1,7 @@
 package com.example.habittracker.domain
 
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.models.toDays
+import com.example.habittracker.domain.models.toDayRecords
 import com.example.habittracker.domain.streak.SpecificDaysPerWeekStreakRule
 import com.example.habittracker.domain.streak.calculateStreak
 import junit.framework.TestCase.assertEquals
@@ -20,7 +20,7 @@ class SpecificDaysPerWeekStreakRuleTest {
     fun one_satisfied_day_returns_one() {
         val days = listOf(
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1)
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY)))
         assertEquals(1 to 1, result)
@@ -32,7 +32,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(3 to 3, result)
@@ -46,7 +46,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 8), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(3 to 3, result)
@@ -57,7 +57,7 @@ class SpecificDaysPerWeekStreakRuleTest {
         val days = listOf(
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(1 to 1, result)
@@ -72,7 +72,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 14), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 16), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(6 to 6, result)
@@ -86,7 +86,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 16), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(1 to 4, result)
@@ -100,7 +100,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 19), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(1 to 4, result)
@@ -115,7 +115,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 16), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 19), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(2 to 4, result)
@@ -127,7 +127,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 7), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(3 to 3, result)
@@ -138,7 +138,7 @@ class SpecificDaysPerWeekStreakRuleTest {
         val days = listOf(
             HabitLog(1, 1, LocalDate.of(2026, 10, 5), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 9), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(1 to 1, result)
@@ -151,7 +151,7 @@ class SpecificDaysPerWeekStreakRuleTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 12), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 14), 1),
             HabitLog(1, 1, LocalDate.of(2026, 10, 16), 1),
-        ).toDays(1)
+        ).toDayRecords(1)
 
         val result = calculateStreak(days, SpecificDaysPerWeekStreakRule(setOf(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY)))
         assertEquals(4 to 4, result)

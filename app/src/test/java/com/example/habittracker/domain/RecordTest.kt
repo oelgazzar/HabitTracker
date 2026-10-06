@@ -1,8 +1,8 @@
 package com.example.habittracker.domain
 
 import com.example.habittracker.domain.models.HabitLog
-import com.example.habittracker.domain.models.toDays
-import com.example.habittracker.domain.models.toWeeks
+import com.example.habittracker.domain.models.toDayRecords
+import com.example.habittracker.domain.models.toWeekRecords
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 import java.time.LocalDate
@@ -16,7 +16,7 @@ class RecordTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 3), 1),
         )
 
-        val days = logs.toDays(1)
+        val days = logs.toDayRecords(1)
         println(days)
 
         assertEquals(2, days.size)
@@ -32,11 +32,11 @@ class RecordTest {
             HabitLog(1, 1, LocalDate.of(2026, 10, 11), 1), // Sunday of following week
         )
 
-        val days = logs.toDays(1)
-        val weeks = days.toWeeks(3)
+        val days = logs.toDayRecords(1)
+        val weeks = days.toWeekRecords(3)
         println(weeks)
 
         assertEquals(2, weeks.size)
-        assertEquals(2, weeks.first().days.size)
+        assertEquals(2, weeks.first().dayRecords.size)
     }
 }
