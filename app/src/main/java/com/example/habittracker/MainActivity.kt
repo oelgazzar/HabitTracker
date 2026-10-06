@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
@@ -50,12 +51,12 @@ class MainActivity : ComponentActivity() {
                         contentAlignment = Alignment.Center
                     ) {
                         CircularProgressIndicator(
-                            progress = { todayRecords.sumOf { if (it.isSatisfied) 1 else 0 } + 5 / todayRecords.size.toFloat() },
+                            progress = { todayRecords.sumOf { if (it.isSatisfied) 1 else 0 } / todayRecords.size.toFloat() },
                             strokeWidth = 8.dp  ,
                             modifier = Modifier.size(110.dp)
                         )
                         Text(
-                            "${todayRecords.sumOf { if (it.isSatisfied) 1 else 0 } + 5}  / ${todayRecords.size}",
+                            "${todayRecords.sumOf { if (it.isSatisfied) 1 else 0 }}  / ${todayRecords.size}",
                             style = MaterialTheme.typography.titleLarge
                         )
                     }
@@ -70,7 +71,9 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Column {
                                     Text(it.habit.name)
-                                    Text("${it.progress} / ${it.target} ${it.habit.unit}")
+                                    LinearProgressIndicator(
+                                        progress = { it.progress.toFloat() / it.target }
+                                    )
                                     Text(it.habit.frequency.type.name)
                                 }
                                 Text(if (it.isSatisfied) "Completed" else "Not completed")

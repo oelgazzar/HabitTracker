@@ -25,9 +25,9 @@ class HabitManager @Inject constructor(
         val weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SATURDAY))
         val weekEnd = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.FRIDAY))
 
-        return repository.getAllHabits().combine(repository.getHabitLogs(weekStart, weekEnd)) { habits, logs ->
+        return combine(repository.getAllHabits(),repository.getHabitLogs(weekStart, weekEnd)) { habits, logs ->
             habits.map { habit ->
-                habit.copy(logs = logs.filter { it.habitId == it.id })
+                habit.copy(logs = logs.filter { log -> log.habitId == habit.id })
             }
         }.map {
             extractTodayRecords(it, today)
