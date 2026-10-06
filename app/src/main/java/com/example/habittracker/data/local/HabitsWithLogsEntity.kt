@@ -29,3 +29,17 @@ fun HabitsWithLogsEntity.toDomain() = Habit(
 )
 
 fun List<HabitsWithLogsEntity>.toDomain() = map { it.toDomain() }
+
+fun Map<HabitEntity, List<HabitLogEntity>>.toDomain() = map { (habit, logs) ->
+    Habit(
+        id = habit.id,
+        name = habit.name,
+        icon = habit.icon,
+        target = habit.target,
+        unit = habit.unit,
+        startDate = LocalDate.parse(habit.startDate),
+//        reminderTime = LocalTime.parse(habit.reminderTime),
+        frequency = habit.frequency,
+        logs = logs.toDomain()
+    )
+}
