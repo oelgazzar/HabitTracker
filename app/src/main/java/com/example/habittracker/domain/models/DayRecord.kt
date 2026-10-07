@@ -8,7 +8,7 @@ data class DayRecord(
     val logs: List<HabitLog>,
 ) : Record {
     override val progress: Int
-        get() = logs.sumOf { it.value }
+        get() = logs.sumOf { it.value }.coerceAtMost(target)
     override val target: Int
         get() = habit.target?:1
 }
@@ -18,3 +18,8 @@ fun List<HabitLog>.toDayRecords(habit: Habit) = groupBy {
 }.map {
     DayRecord(habit, it.key, it.value)
 }
+
+fun Habit.toDayRecord(day: LocalDate) = DayRecord(
+    this,
+    day,
+    this.logs?.filter { day == it.date }?:emptyList())

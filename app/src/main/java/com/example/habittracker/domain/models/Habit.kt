@@ -11,7 +11,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 
 data class Habit(
-    val id: Int,
+    val id: Int = 0,
     val name: String,
     val icon: HabitIcon,
     val target: Int?,
@@ -22,9 +22,9 @@ data class Habit(
     val logs: List<HabitLog>? = null
 )
 
-enum class HabitIcon(val icon: ImageVector) {
-    BOOK(book_ribbon),
-    FITNESS(directions_run),
-    CODING(laptop_mac),
-    MEDITATION(self_improvement),
+enum class HabitIcon(val icon: ImageVector, val color: Color) {
+    BOOK(book_ribbon, Color(0xffe8b3dd)),
+    FITNESS(directions_run, Color(0xff622126)),
+    CODING(laptop_mac, Color(0xff3c3c92)),
+    MEDITATION(self_improvement, Color(0xff3c3c92)),
 }
